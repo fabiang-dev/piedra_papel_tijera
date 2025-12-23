@@ -8,8 +8,6 @@ reglas = {
     "papel"  : "piedra"
 }
 
-puntos_usuario = 0
-puntos_ia = 0
 PUNTOS_PARA_GANAR = 3   
 
 
@@ -40,28 +38,35 @@ def anunciar_ganador(p_usuario, p_ia):
         print(f"Tus puntos: {p_usuario}")
         print(f"Puntos de la computadora: {p_ia}")
 
-while puntos_usuario < PUNTOS_PARA_GANAR and puntos_ia < PUNTOS_PARA_GANAR:
-    
-    movimiento_ia = obtener_movimiento_ia()
-    
-    movimiento_usuario = obtener_movimiento_usuario()
-    if movimiento_usuario is None:
-        continue
-    
-    
-    print(f"Elegiste: {movimiento_usuario}")
-    print(f"El ordenador eligio: {movimiento_ia}")
+def jugar():
 
-    if movimiento_usuario == movimiento_ia:
-        print("Empate")
-    elif reglas[movimiento_usuario] == movimiento_ia:
-        print("Has ganado")
-        puntos_usuario += 1
-    else:
-        print("Has perdido")
-        puntos_ia += 1
-            
-    mostar_marcador(puntos_usuario, puntos_ia)
+    puntos_usuario = 0
+    puntos_ia = 0
     
-anunciar_ganador(puntos_usuario, puntos_ia)
-    
+    while puntos_usuario < PUNTOS_PARA_GANAR and puntos_ia < PUNTOS_PARA_GANAR:
+
+        movimiento_ia = obtener_movimiento_ia()
+
+        movimiento_usuario = obtener_movimiento_usuario()
+        if movimiento_usuario is None:
+            continue
+        
+        
+        print(f"Elegiste: {movimiento_usuario}")
+        print(f"El ordenador eligio: {movimiento_ia}")
+
+        if movimiento_usuario == movimiento_ia:
+            print("Empate")
+        elif reglas[movimiento_usuario] == movimiento_ia:
+            print("Has ganado")
+            puntos_usuario += 1
+        else:
+            print("Has perdido")
+            puntos_ia += 1
+
+        mostar_marcador(puntos_usuario, puntos_ia)
+
+    anunciar_ganador(puntos_usuario, puntos_ia)
+
+
+jugar()    
