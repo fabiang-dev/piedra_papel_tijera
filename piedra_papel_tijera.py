@@ -10,16 +10,45 @@ reglas = {
 
 puntos_usuario = 0
 puntos_ia = 0
+PUNTOS_PARA_GANAR = 3   
 
-while puntos_usuario < 3 and puntos_ia < 3:
+
+def obtener_movimiento_ia():
+    return random.choice(movimientos)
+
+
+def obtener_movimiento_usuario():
+    movimiento = str(input("Introduce tu movimiento: PIEDRA - PAPEL - TIJERA: "))
+    if movimiento.lower() not in movimientos:
+        print("Movimiento invalid, elige una opcion correcta")
+        return None
+    return movimiento
+
+
+def mostar_marcador(p_usuario, p_ia):
+    print(f"Marcador: Tu: {p_usuario} - Computadora: {p_ia}")
+    print("--------------------------------------")
+
+
+def anunciar_ganador(p_usuario, p_ia):
+    if p_usuario > p_ia:
+        print("Felicidades has ganado")
+        print(f"Tus puntos: {p_usuario}")
+        print(f"Puntos de la computadora: {p_ia}")
+    else:
+        print("Has perdido")
+        print(f"Tus puntos: {p_usuario}")
+        print(f"Puntos de la computadora: {p_ia}")
+
+while puntos_usuario < PUNTOS_PARA_GANAR and puntos_ia < PUNTOS_PARA_GANAR:
     
-    movimiento_ia = random.choice(movimientos)
-    movimiento_usuario = str(input("Introduce tu movimiento: PIEDRA - PAPEL - TIJERA: "))
+    movimiento_ia = obtener_movimiento_ia()
     
-    if movimiento_usuario.lower() not in movimientos:
-        print("El movimientos no está permitido")
+    movimiento_usuario = obtener_movimiento_usuario()
+    if movimiento_usuario is None:
         continue
-
+    
+    
     print(f"Elegiste: {movimiento_usuario}")
     print(f"El ordenador eligio: {movimiento_ia}")
 
@@ -32,15 +61,7 @@ while puntos_usuario < 3 and puntos_ia < 3:
         print("Has perdido")
         puntos_ia += 1
             
-    print(f"Marcador: Tu: {puntos_usuario} - Computadora: {puntos_ia}")
-    print("--------------------------------------")
+    mostar_marcador(puntos_usuario, puntos_ia)
     
-if puntos_usuario > puntos_ia:
-    print("Felicidades has ganado")
-    print(f"Tus puntos: {puntos_usuario}")
-    print(f"Puntos de la computadora: {puntos_ia}")
-else:
-    print("Has perdido")
-    print(f"Puntos de la computadora: {puntos_ia}")
-    print(f"Tus puntos: {puntos_usuario}")
+anunciar_ganador(puntos_usuario, puntos_ia)
     
